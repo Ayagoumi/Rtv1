@@ -6,7 +6,7 @@
 #    By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/25 10:38:14 by ayagoumi          #+#    #+#              #
-#    Updated: 2021/02/01 19:27:08 by ayagoumi         ###   ########.fr        #
+#    Updated: 2021/02/17 16:36:36 by ayagoumi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SDLF = -I SDL/SDL2.framework/Headers
 
 INC = inc/rtv1.h libft/libft.h 
 
-SRC = srcs/main.c srcs/window/sdl_init.c srcs/events/events.c
+SRC = srcs/main.c srcs/window/sdl_init.c srcs/events/events.c srcs/vec_utility_functions/functions.c
 
 FRAM = -lmlx -framework OpenGL -framework AppKit -framework OpenCL  -framework SDL2 -F ./SDL/ -framework SDL2_mixer -F ./SDL  -framework SDL2_image -F ./SDL -framework SDL2_ttf -F ./SDL -rpath @loader_path/SDL -lz 
 
