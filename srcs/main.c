@@ -6,7 +6,7 @@
 /*   By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:04:59 by ayagoumi          #+#    #+#             */
-/*   Updated: 2021/02/21 11:29:51 by ayagoumi         ###   ########.fr       */
+/*   Updated: 2021/02/21 19:08:41 by ayagoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,67 @@ double	map(int position, int max_wh, double new_min_scope
 }
 
 
-void setup_scene(t_ray *r, t_sphere *sphere, t_light *l)
+t_sphere *setup_scene(t_ray *r, t_light *l)
 {
-	r->origin.x = 0;
-	r->origin.y = 0;
-	r->origin.z = -1;
+    r->origin.x = 0;
+    r->origin.y = 0;
+    r->origin.z = -1;
+	
+    t_sphere *sphere;
+    sphere = (t_sphere *)malloc(sizeof(t_sphere));
+    sphere->pos.x = 0.2;
+    sphere->pos.y = 0;
+    sphere->pos.z = 0;
+    sphere->r = 0.2;
+    sphere->color.x = 255;
+    sphere->color.y = 0;
+    sphere->color.z = 0;
+    sphere->next = NULL;
+    
+	t_sphere *tmp;
+    tmp = (t_sphere *)malloc(sizeof(t_sphere));
+    tmp->pos.x = 0;
+    tmp->pos.y = 0;
+    tmp->pos.z = 0;
+    tmp->r = 0.2;
+    tmp->color.x = 0;
+    tmp->color.y = 255;
+    tmp->color.z = 255;
 
-	sphere->pos.x = 0;
-	sphere->pos.y = 0;
-	sphere->pos.z = 1;
-	sphere->r = 0.9;
-	sphere->color.x = 255;
-	sphere->color.y = 16;
-	sphere->color.z = 256;
+    tmp->next = NULL;
+    sphere->next = tmp;
+	tmp->next = (t_sphere *)malloc(sizeof(t_sphere));
+	tmp = tmp->next;
+    tmp->pos.x = -0.2;
+    tmp->pos.y = 0;
+    tmp->pos.z = 0;
+    tmp->r = 0.2;
+    tmp->color.x = 0;
+    tmp->color.y = 255;
+    tmp->color.z = 0;
+	tmp->next = NULL;
 
+    l->pos.x = 0;
+    l->pos.y = 0;
+    l->pos.z = -1;
+    l->color.x = 255;
+    l->color.z = 255;
+    l->color.y = 255;
+	l->next = NULL;
+	
+	t_light *head;
+	head = l;
+	l->next = (t_light *)malloc(sizeof(t_light));
+	l = l->next;
 	l->pos.x = 0;
-	l->pos.y = 6;
-	l->pos.z = -10;
-
-	l->color.x = 255;
-	l->color.z = 255;
-	l->color.y = 255;
+    l->pos.y = -10;
+    l->pos.z = -10;
+    l->color.x = 255;
+    l->color.y = 255;
+    l->color.z = 255;
+	l->next = NULL;
+	l = head;
+    return (sphere);
 }
 
 int main()
