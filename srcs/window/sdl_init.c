@@ -6,7 +6,7 @@
 /*   By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:11:36 by ayagoumi          #+#    #+#             */
-/*   Updated: 2021/02/01 15:35:47 by ayagoumi         ###   ########.fr       */
+/*   Updated: 2021/02/19 16:59:19 by ayagoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			sdl_init_win(t_rtv1	*rtv)
 		SDL_WINDOWPOS_CENTERED,
 		WIDTH,
 		HEIGHT,
-		SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS
+		SDL_WINDOW_OPENGL
 	);
 	if (!rtv->sdl.win)
 		return (1);

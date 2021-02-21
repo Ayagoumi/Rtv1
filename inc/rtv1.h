@@ -6,7 +6,7 @@
 /*   By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:05:37 by ayagoumi          #+#    #+#             */
-/*   Updated: 2021/02/18 17:54:49 by ayagoumi         ###   ########.fr       */
+/*   Updated: 2021/02/21 11:24:25 by ayagoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,21 @@ typedef struct	s_camera
 	double	zoom;
 }				t_camera;
 
+typedef struct	s_light
+{
+	t_vec3	pos;
+	t_vec3	dir;
+	double	amb_coef;
+	double	dif_coef;
+	double	spe_coef;
+	t_vec3	color;
+}				t_light;
+
 typedef struct	s_sphere
 {
 	t_vec3	pos;
 	double	r;
-	int		color;
+	t_vec3		color;
 }				t_sphere;
 
 typedef struct			s_sdl
@@ -79,6 +89,14 @@ int         sdl_init_render(t_rtv1   *rtv);
 int			sdl_init_win(t_rtv1	*rtv);
 
 void		process_input(t_rtv1 *rtv);
+
+double	map(int position, int max_wh, double new_min_scope
+		, double new_max_scope);
+void setup_scene(t_ray *r, t_sphere *sphere, t_light *l);
+
+double  intersect(t_ray *r, t_sphere *s);
+double	get_color(t_ray *r, double hit, t_sphere *sphere, t_light *l);
+void cast_rays(t_rtv1 *rtv);
 
 double		vec_length(t_vec3 vec);
 t_vec3		plus(t_vec3 a, t_vec3 b);
