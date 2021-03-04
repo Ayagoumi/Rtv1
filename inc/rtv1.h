@@ -6,7 +6,7 @@
 /*   By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:05:37 by ayagoumi          #+#    #+#             */
-/*   Updated: 2021/03/04 11:11:54 by ayagoumi         ###   ########.fr       */
+/*   Updated: 2021/03/04 15:17:39 by ayagoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ typedef struct	s_vec3
 
 typedef struct	s_point
 {
-	int		x;
-	int		y;
+	double		x;
+	double		y;
 }				t_point;
 
 typedef struct	s_ray
@@ -125,6 +125,9 @@ typedef	struct 		s_hsno
 	double		ambcoef;
 	t_vec3		l_dir;
 	t_vec3		sh;
+    t_vec3		uv;
+    t_vec3		wv;
+    t_vec3		vv;
 }					t_hsno;
 
 
@@ -161,5 +164,8 @@ double      intersect_sphere(t_ray r, t_object *sphere);
 int     ft_get_full_color(t_hsno *hsno, t_light *light, t_scene *scene, t_ray *ray);
 double      ft_get_specular(t_hsno *hsno, t_light *light);
 double     ft_get_diffuse(t_hsno *hsno, t_light *light);
+
+void		calc_surface_normal2(t_ray r, t_object *object, t_hsno *hsno);
+void		calc_surface_normal(t_ray r, t_object *object, t_hsno *hsno);
 
 #endif
