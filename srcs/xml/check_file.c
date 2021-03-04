@@ -6,7 +6,7 @@
 /*   By: yoouali <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:27:32 by yoouali           #+#    #+#             */
-/*   Updated: 2021/03/04 14:36:28 by yoouali          ###   ########.fr       */
+/*   Updated: 2021/03/04 16:10:48 by yoouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,12 @@ int		get_line(t_xmlpar *xmlpar, char *rule, int *rule_num)
 		return (0);
 	}
 	xmlpar->ind = 0;
-	printf("dazt line\n");
 	return (1);
 }
 
 int		free_parrser(char *rule, int ret)
 {
 	free(rule);
-	printf("id this a problem\n");
 	return (ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yoouali <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 15:23:42 by yoouali           #+#    #+#             */
-/*   Updated: 2021/03/04 15:26:49 by yoouali          ###   ########.fr       */
+/*   Updated: 2021/03/04 16:10:28 by yoouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int		get_rule(t_xmlpar *xmlpar, char **rule, int *rule_num, int parent)
 {
 	int		len;
 
-	printf("iam in gget rule\n");
 	len = 0;
 	while (xmlpar->line[xmlpar->ind + len + 1] &&\
 			xmlpar->line[xmlpar->ind + len + 1] != '>')
@@ -96,7 +95,6 @@ int		get_rule(t_xmlpar *xmlpar, char **rule, int *rule_num, int parent)
 		return (0);
 	if (!(*rule = ft_strsub(xmlpar->line, xmlpar->ind + 1, len)))
 		return (0);
-	printf("the rule:%s \n", *rule);
 	if (!(*rule_num = get_rule_num(*rule)))
 		return (0);
 	if (!(check_rule_pos(*rule_num, parent)))
@@ -105,6 +103,5 @@ int		get_rule(t_xmlpar *xmlpar, char **rule, int *rule_num, int parent)
 		if (!(xmlpar->addr = load_rule(xmlpar->scene, *rule_num)))
 			return (0);
 	xmlpar->ind = xmlpar->ind + 2 + len;
-	printf("iam out from get rule\n");
 	return (1);
 }
