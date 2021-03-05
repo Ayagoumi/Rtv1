@@ -6,7 +6,7 @@
 /*   By: yoouali <yoouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:46:56 by yoouali           #+#    #+#             */
-/*   Updated: 2021/03/04 14:57:47 by yoouali          ###   ########.fr       */
+/*   Updated: 2021/03/05 08:52:44 by yoouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,20 @@ void	vectorse_rotation(t_object *o)
 int		check_object_structer(t_object *object)
 {
 	t_object	*tmp;
+	int			i;
 
+	i = 1;
 	tmp = object;
 	while (tmp)
 	{
 		if (tmp->tab[0] == 0 || tmp->tab[1] == 0 || tmp->tab[5]\
 				== 0 || tmp->tab[4] == 0 || tmp->tab[6] == 0)
-			return (0);
+			return (structer_error(2, i));
 		if (tmp->tab[2] == 1)
 			tmp->position = plus(tmp->position, tmp->translation);
 		if (tmp->tab[3] == 1)
 			vectorse_rotation(tmp);
+		i++;
 		tmp = tmp->next;
 	}
 	return (1);
@@ -56,15 +59,39 @@ int		check_object_structer(t_object *object)
 int		check_light_structer(t_light *light)
 {
 	t_light		*tmp;
+	int			i;
 
+	i = 1;
 	tmp = light;
 	while (tmp)
 	{
 		if (tmp->tab[0] == 0 || tmp->tab[1] == 0 || tmp->tab[2] == 0)
-			return (0);
+			return (structer_error(1, i));
+		i++;
 		tmp = tmp->next;
 	}
 	return (1);
+}
+
+int		structer_error(int ret, int num)
+{
+	if (ret == 0)
+		ft_putendl("Rtv1 Error : missing camera in the scene");
+	if (ret == 1)
+	{
+		ft_putstr("Rtv1 Error : missing tag in light number ");
+		ft_putnbr(num);
+		write(1, "\n", 1);
+	}
+	if (ret == 2)
+	{
+		ft_putstr("Rtv1 Error : missing tag in object number");
+		ft_putnbr(num);
+		write(1, "\n", 1);
+	}
+	if (ret == 3)
+		ft_putendl("Rtv1 Error : missing tag in camera");
+	return (0);
 }
 
 int		structer_check(t_xmlpar xmlpar)
@@ -73,11 +100,11 @@ int		structer_check(t_xmlpar xmlpar)
 	t_light		*light;
 
 	if (!xmlpar.scene->camera)
-		return (0);
+		return (structer_error(0, 0));
 	camera = xmlpar.scene->camera;
 	light = xmlpar.scene->light;
 	if (camera->tab[0] == 0 || camera->tab[1] == 0 || camera->tab[2] == 0)
-		return (0);
+		return (structer_error(3, 0));
 	if (xmlpar.scene->light)
 		if (!check_light_structer(xmlpar.scene->light))
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: yoouali <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 15:38:53 by yoouali           #+#    #+#             */
-/*   Updated: 2021/03/04 15:41:08 by yoouali          ###   ########.fr       */
+/*   Updated: 2021/03/05 08:41:43 by yoouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ int		parrs_rule_end(t_xmlpar *xmlpar, char **rule)
 	return (rus);
 }
 
+t_scene	*file_error(t_scene *scene)
+{
+	perror("Rtv1 Error : ");
+	free(scene);
+	return (NULL);
+}
+
 t_scene	*xml_parsser(char *file)
 {
 	t_xmlpar		xmlpar;
@@ -70,7 +77,9 @@ t_scene	*xml_parsser(char *file)
 	xmlpar.scene->camera = NULL;
 	xmlpar.scene->light = NULL;
 	xmlpar.scene->object = NULL;
-	xmlpar.fd = open(file, O_RDONLY);
+	xmlpar.nline = 0;
+	if ((xmlpar.fd = open(file, O_RDONLY)) < 1)
+		return (file_error(xmlpar.scene));
 	if (check_file(&xmlpar, 0) == -1 || !structer_check(xmlpar))
 		return (free_structer(xmlpar.scene));
 	return (xmlpar.scene);

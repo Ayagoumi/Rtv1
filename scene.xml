@@ -2,7 +2,7 @@
 
 <camera>
     <origin>0,0,0</origin>
-    <lookat>0,0,1</lookat>
+	<lookat>0,0,1</lookat>
     <fov>120</fov>
 </camera>
 
@@ -21,7 +21,7 @@
 <sphere>
     <position>-2,0,10 </position>
     <radius>1</radius>
-    <color>0x0000ff</color>
+    <color>0x0d90ff</color>
 </sphere>
 
 <cylinder>

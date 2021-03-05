@@ -9,6 +9,7 @@ typedef struct s_xmlpar
     int     ind;
     void    *addr;
     char    *line;
+	int		nline;
     t_scene *scene;
 }              t_xmlpar;
 
@@ -38,7 +39,8 @@ void    *load_rule(t_scene *scene, int rule_num);
 void    *load_object(t_scene *scene, int rule_num);
 void    *load_light(t_scene *scene);
 int     check_file(t_xmlpar *xmlpar, int parent);
-int     free_parrser(char *rule, int ret);
+int     free_parrser(char *rule, int ret, int parent, t_xmlpar *xml);
 int     get_line(t_xmlpar *xmlpar, char *rule, int *rule_num);
+int		structer_error(int ret, int num);
 
 #endif
