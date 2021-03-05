@@ -6,7 +6,7 @@
 /*   By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:05:37 by ayagoumi          #+#    #+#             */
-/*   Updated: 2021/03/04 15:17:39 by ayagoumi         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:17:56 by ayagoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ typedef struct	s_point
 	double		x;
 	double		y;
 }				t_point;
+
+typedef struct	s_pixel
+{
+	int			i;
+	int			j;
+}				t_pixel;
 
 typedef struct	s_ray
 {
@@ -115,6 +121,7 @@ typedef	struct		s_intersect
 
 typedef	struct 		s_hsno
 {
+	t_ray		r;
 	double		hit;
 	t_vec3		surface_normal;
 	t_object	*object;
@@ -161,11 +168,24 @@ double      intersect_cone(t_ray r, t_object *cone);
 double      intersect_cylinder(t_ray r, t_object *cylinder);
 double      intersect_plane(t_ray r, t_object *plane);
 double      intersect_sphere(t_ray r, t_object *sphere);
-int     ft_get_full_color(t_hsno *hsno, t_light *light, t_scene *scene, t_ray *ray);
+int     ft_get_full_color(t_hsno *hsno, t_scene *scene, t_ray *ray);
 double      ft_get_specular(t_hsno *hsno, t_light *light);
 double     ft_get_diffuse(t_hsno *hsno, t_light *light);
 
 void		calc_surface_normal2(t_ray r, t_object *object, t_hsno *hsno);
 void		calc_surface_normal(t_ray r, t_object *object, t_hsno *hsno);
+/* phong coloring + Shadow */
+t_vec3		get_ambiant(t_hsno *hsno);
+double		ft_get_diffuse(t_hsno *hsno, t_light *light);
+double		ft_get_specular(t_hsno *hsno, t_light *light);
+int			shadow(t_ray *r, t_hsno *hsno, t_light *l, t_object *objects);
+int			rgb_to_int(t_vec3 rgb);
+
+/* Camera */
+void		declare_camera(t_ray *r, t_scene *scene, t_hsno *hsno, t_point *p);
+
+/* Surface Normal */
+void		calc_surface_normal(t_ray r, t_object *object, t_hsno *hsno);
+void		calc_surface_normal2(t_ray r, t_object *object, t_hsno *hsno);
 
 #endif

@@ -1,0 +1,22 @@
+<scene>
+
+    <camera>
+        <origin> 0,0,-10</origin>
+        <lookat>0,0,1</lookat>
+        <fov>60</fov>
+    </camera>
+
+    <sphere>
+        <position>0,0,5</position>
+        <radius>4</radius>
+        <color>0xff0000</color>
+    </sphere>
+
+    <light>
+        <position>4,3,-15</position>
+        <color>0xffffff</color>
+        <intensity>50</intensity>
+    </light>
+
+
+</scene>

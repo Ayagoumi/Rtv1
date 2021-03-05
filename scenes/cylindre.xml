@@ -1,0 +1,25 @@
+<scene>
+
+    <camera>
+        <origin> 0,0,-10</origin>
+        <lookat>0,0,1</lookat>
+        <fov>60</fov>
+    </camera>
+
+    <cylinder>
+        <position>0,0,5</position>
+        <orientation>0,1,0</orientation>
+        <radius>1</radius>
+        <color>0xff00ff</color>
+        <rotation>0,0,0</rotation>
+        <translation>0,0,0</translation>
+    </cylinder>
+
+    <light>
+        <position>4,3,-15</position>
+        <color>0xffffff</color>
+        <intensity>50</intensity>
+    </light>
+
+
+</scene>
