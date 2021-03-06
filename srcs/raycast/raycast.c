@@ -6,7 +6,7 @@
 /*   By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:07:03 by ayagoumi          #+#    #+#             */
-/*   Updated: 2021/03/05 16:19:53 by ayagoumi         ###   ########.fr       */
+/*   Updated: 2021/03/06 10:57:19 by ayagoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_object	*raycast_object(t_ray r, t_hsno *hsno, t_scene *scene)
 	double		het;
 
 	object = scene->object;
+	if (!object)
+		return (NULL);
 	hsno->hit = calc_intersect(r, object);
 	tmp = object->next;
 	while (tmp)
@@ -55,10 +57,10 @@ void		trace(t_rtv1 *rtv, t_hsno *hsno, t_scene *scene, t_pixel pixel)
 void		ft_cast_rays(t_rtv1 *rtv, t_scene *scene)
 {
 	t_pixel	pixel;
-	double	u;
-	double	v;
 	t_hsno	hsno;
 	t_point	p;
+	double	u;
+	double	v;
 
 	declare_camera(&hsno.r, scene, &hsno, &p);
 	pixel.i = 0;

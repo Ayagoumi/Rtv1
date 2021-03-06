@@ -6,7 +6,7 @@
 #    By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/25 10:38:14 by ayagoumi          #+#    #+#              #
-#    Updated: 2021/03/05 16:20:35 by ayagoumi         ###   ########.fr        #
+#    Updated: 2021/03/06 12:53:30 by ayagoumi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,45 +14,121 @@
 
 NAME = rtv1
 
+DEF = 		\x1B[1;0m
+RED = 		\x1B[1;31m
+PURPLE =	\x1B[1;34m
+BLUE = 		\x1B[1;96m
+GREEN = 	\x1B[1;32m
+SILVER = 	\x1B[1;90m
+YELLOW = 	\x1B[1;33m
+
 CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-LIB = libft/libft.a
+LIB = -lft
+PATH_LIB = libft/
 
 SDLF = -I SDL/SDL2.framework/Headers
 
-INC = inc/rtv1.h libft/libft.h
+INC = inc/rtv1.h
+INCLIB = libft/libft.h
+INC_PATH = inc/
 
-SRC = srcs/main.c srcs/window/sdl_init.c srcs/events/events.c srcs/vec_utility_functions/functions.c srcs/vec_utility_functions/functions2.c  srcs/xml/check_file.c srcs/xml/color.c srcs/xml/data.c srcs/xml/data2.c srcs/xml/last.c srcs/xml/leak.c srcs/xml/load.c srcs/xml/object.c srcs/xml/rule.c srcs/xml/xml.c srcs/raycast/raycast.c srcs/raycast/intersect.c srcs/raycast/color.c srcs/raycast/camera.c srcs/raycast/surface_normal.c srcs/raycast/phong_coloring.c
+PATH_SRC = srcs/
+PATH_WIN = $(PATH_SRC)window/
+PATH_EVENT= $(PATH_SRC)events/
+PATH_VEC = $(PATH_SRC)vec_operations/
+PATH_XML = $(PATH_SRC)xml/
+PATH_RAYCAST = $(PATH_SRC)raycast/
+PATH_OBJ = obj/
+
+SRC =				main.c
+
+
+SRC_WIN =			sdl_init.c
+
+SRC_EVENT = 		events.c
+
+
+SRC_VEC = 			operations.c \
+					operations2.c \
+					map.c
+
+SRC_XML =			check_file.c\
+					color.c\
+					data.c\
+					data2.c\
+					last.c\
+					leak.c\
+					load.c\
+					object.c\
+					rule.c\
+					xml.c
+
+SRC_RAYCAST =		camera.c\
+					raycast.c\
+					color_object.c\
+					intersect.c\
+					phong_coloring.c\
+					surface_normal.c
 
 FRAM = -lmlx -framework OpenGL -framework AppKit -framework OpenCL  -framework SDL2 -F ./SDL/ -framework SDL2_mixer -F ./SDL  -framework SDL2_image -F ./SDL -framework SDL2_ttf -F ./SDL -rpath @loader_path/SDL -lz
 
-OBJ = $(SRC:.c=.o)
+OBJ := $(addprefix $(PATH_OBJ), $(SRC:.c=.o))\
+	$(addprefix $(PATH_OBJ), $(SRC_WIN:.c=.o))\
+	$(addprefix $(PATH_OBJ), $(SRC_EVENT:.c=.o))\
+	$(addprefix $(PATH_OBJ), $(SRC_VEC:.c=.o))\
+	$(addprefix $(PATH_OBJ), $(SRC_XML:.c=.o))\
+	$(addprefix $(PATH_OBJ), $(SRC_RAYCAST:.c=.o))
 
-F_OBJ = ./OBJ
+define to_obj
+@mkdir -p $(PATH_OBJ)
+@$(CC) $(CFLAGS) -c $1 -o $2 -I $(INC_PATH) -I $(PATH_LIB) $(SDLF)
+
+@printf "$(SILVER)[$(PURPLE)Object file$(BLUE) $(notdir $2)$(SILVER)] $(GREEN)Created.$(DEF)\n"
+endef
+
+define to_binary
+@make -C $(PATH_LIB)
+@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L $(PATH_LIB) $(LIB) $(FRAM) -I $(INC_PATH) -I $(PATH_LIB) $(SDLF)
+@printf "$(SILVER)[$(PURPLE)Binary file$(BLUE) $(notdir $(NAME))$(SILVER)] $(GREEN)Created.$(DEF)\n\n"
+endef
+
+define ft_clean
+@make clean -C $(PATH_LIB)
+@rm -rf $1
+@printf "$(SILVER)[$(PURPLE)$1$(YELLOW)$2$(SILVER)] $(RED)deleted.$(DEF)\n\n"
+endef
 
 all: $(NAME)
-$(NAME):$(OBJ) $(INC)
-		@echo "\033[2;36m"
-	    @make -C ./mlx  2> /dev/null || true
-		@make -C ./libft  2> /dev/null || true
-		@$(CC) $(CFLAGS) $(OBJ) $(LIB) $(FRAM)  $(SDLF) -o $(NAME)
-		@echo "Wolf_3d: executable file is ready"
-		@echo "\033[0m"
+
+$(NAME) : $(OBJ)
+	@$(call to_binary)
+
+$(PATH_OBJ)%.o: $(PATH_SRC)%.c $(INC) $(INCLIB)
+	@$(call to_obj, $<, $@)
+
+$(PATH_OBJ)%.o: $(PATH_WIN)%.c $(INC) $(INCLIB)
+	@$(call to_obj, $<, $@)
+
+$(PATH_OBJ)%.o: $(PATH_EVENT)%.c $(INC) $(INCLIB)
+	@$(call to_obj, $<, $@)
+
+$(PATH_OBJ)%.o: $(PATH_VEC)%.c $(INC) $(INCLIB)
+	@$(call to_obj, $<, $@)
+
+$(PATH_OBJ)%.o: $(PATH_XML)%.c $(INC) $(INCLIB)
+	@$(call to_obj, $<, $@)
+
+$(PATH_OBJ)%.o: $(PATH_RAYCAST)%.c $(INC) $(INCLIB)
+	@$(call to_obj, $<, $@)
+
 clean:
-		@echo "\033[2;32m"
-		@make clean -C ./mlx  2> /dev/null || true
-		@make clean -C ./libft  2> /dev/null || true
-		@rm -rf $(OBJ)   2> /dev/null || true
-		@echo "Wolf_3d: all resources deleted"
-		@echo "\033[0m"
+	@$(call ft_clean,$(OBJ))
+
 fclean: clean
-		@echo "\033[2;34m"
-		@rm -f $(NAME)  2> /dev/null || true
-		@make fclean -C ./libft  2> /dev/null || true
-		@make fclean -C ./mlx  2> /dev/null || true
-		@echo "Wolf_3d: all resources deleted"
-		@echo "\033[0m"
+	@$(call ft_clean,$(NAME))
+
 re: fclean all
 

@@ -1,7 +1,7 @@
 <scene>
 
     <camera>
-        <origin> 0,0,40</origin>
+        <origin> 0,0,-60</origin>
         <lookat>0,0,1</lookat>
         <fov>60</fov>
     </camera>
@@ -53,6 +53,15 @@
     </cylinder>
 
     <cylinder>
+        <position>12,0,-30</position>
+        <orientation>0,1,0</orientation>
+        <radius>1</radius>
+        <color>0xffffff</color>
+        <rotation>0,0,0</rotation>
+        <translation>0,0,0</translation>
+    </cylinder>
+
+    <cylinder>
         <position>8,0,-30</position>
         <orientation>0,1,0</orientation>
         <radius>1</radius>
@@ -80,6 +89,15 @@
     </cylinder>
 
     <cylinder>
+        <position>-4,0,-30</position>
+        <orientation>0,1,0</orientation>
+        <radius>1</radius>
+        <color>0xffffff</color>
+        <rotation>0,0,0</rotation>
+        <translation>0,0,0</translation>
+    </cylinder>
+
+    <cylinder>
         <position>-8,0,-30</position>
         <orientation>0,1,0</orientation>
         <radius>1</radius>
@@ -89,7 +107,7 @@
     </cylinder>
 
     <cylinder>
-        <position>-4,0,-30</position>
+        <position>-12,0,-30</position>
         <orientation>0,1,0</orientation>
         <radius>1</radius>
         <color>0xffffff</color>

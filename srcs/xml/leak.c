@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   leak.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoouali <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:58:04 by yoouali           #+#    #+#             */
-/*   Updated: 2021/03/04 15:00:49 by yoouali          ###   ########.fr       */
+/*   Updated: 2021/03/06 12:32:07 by ayagoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_structer_object(t_object *object)
 	}
 }
 
-t_scene	*free_structer(t_scene *scene)\
+t_scene	*free_structer(t_scene *scene)
 {
 	if (scene->camera)
 		free(scene->camera);
