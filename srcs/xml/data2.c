@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoouali <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 16:01:21 by yoouali           #+#    #+#             */
-/*   Updated: 2021/03/04 16:09:44 by yoouali          ###   ########.fr       */
+/*   Updated: 2021/03/06 16:01:00 by ayagoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		get_light_data(t_xmlpar *xmlpar, int rule_num, char *str)
 	if (rule_num == 12 && light->tab[2] == 0)
 	{
 		light->tab[2] = 1;
-		light->intensity = (double)ft_atoi(str);
+		light->intensity = ft_atoi(str) < 0 ? 0 : (double)ft_atoi(str);
 		return (1);
 	}
 	if (rule_num == 11 && light->tab[1] == 0)

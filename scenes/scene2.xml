@@ -1,7 +1,7 @@
 <scene>
 
     <camera>
-        <origin> 0,0,-60</origin>
+        <origin> 0,0,40</origin>
         <lookat>0,0,1</lookat>
         <fov>60</fov>
     </camera>

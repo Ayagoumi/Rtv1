@@ -6,7 +6,7 @@
 #    By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/25 10:38:14 by ayagoumi          #+#    #+#              #
-#    Updated: 2021/03/06 12:53:30 by ayagoumi         ###   ########.fr        #
+#    Updated: 2021/03/06 16:19:05 by ayagoumi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,13 +90,11 @@ define to_obj
 endef
 
 define to_binary
-@make -C $(PATH_LIB)
 @$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L $(PATH_LIB) $(LIB) $(FRAM) -I $(INC_PATH) -I $(PATH_LIB) $(SDLF)
 @printf "$(SILVER)[$(PURPLE)Binary file$(BLUE) $(notdir $(NAME))$(SILVER)] $(GREEN)Created.$(DEF)\n\n"
 endef
 
 define ft_clean
-@make clean -C $(PATH_LIB)
 @rm -rf $1
 @printf "$(SILVER)[$(PURPLE)$1$(YELLOW)$2$(SILVER)] $(RED)deleted.$(DEF)\n\n"
 endef
@@ -104,6 +102,7 @@ endef
 all: $(NAME)
 
 $(NAME) : $(OBJ)
+	@make --no-print-directory -C $(PATH_LIB)
 	@$(call to_binary)
 
 $(PATH_OBJ)%.o: $(PATH_SRC)%.c $(INC) $(INCLIB)
@@ -125,10 +124,14 @@ $(PATH_OBJ)%.o: $(PATH_RAYCAST)%.c $(INC) $(INCLIB)
 	@$(call to_obj, $<, $@)
 
 clean:
+	@make clean --no-print-directory -C $(PATH_LIB)
 	@$(call ft_clean,$(OBJ))
+	@rmdir $(PATH_OBJ)
 
 fclean: clean
-	@$(call ft_clean,$(NAME))
+	@make fclean --no-print-directory -C $(PATH_LIB)
+	@$(call ft_clean, $(NAME))
 
 re: fclean all
 
+.PHONY: re fclean clean all

@@ -6,7 +6,7 @@
 /*   By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:11:36 by ayagoumi          #+#    #+#             */
-/*   Updated: 2021/03/04 16:22:20 by ayagoumi         ###   ########.fr       */
+/*   Updated: 2021/03/06 15:57:49 by ayagoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,13 @@ int			sdl_init_texture(t_rtv1 *rtv)
 	if (!rtv->sdl.texture)
 		return (1);
 	return (0);
+}
+
+void		sdl_quit(t_rtv1 *rtv)
+{
+	SDL_DestroyRenderer(rtv->sdl.renderer);
+	SDL_DestroyWindow(rtv->sdl.win);
+	free(rtv->data);
+	free(rtv);
+	SDL_Quit();
 }

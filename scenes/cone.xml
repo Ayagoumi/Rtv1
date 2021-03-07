@@ -9,7 +9,8 @@
     <cone>
         <position>0,80,0</position>
         <orientation>1,1,0</orientation>
-        <translation>20,20,20</translation>
+        <translation>0,0,0</translation>
+        <rotation>-30,0,0</rotation>
         <angle>5</angle>
         <color>0x0000ff</color>
     </cone>
