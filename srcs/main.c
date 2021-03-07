@@ -35,7 +35,7 @@ int		initialize_variables(t_rtv1 **rtv, t_scene **scene, char **av)
 		free((*rtv)->data);
 		return (0);
 	}
-	return (1)
+	return (1);
 }
 
 int		main(int ac, char **av)
