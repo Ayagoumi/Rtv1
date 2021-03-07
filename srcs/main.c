@@ -6,7 +6,7 @@
 /*   By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 15:04:59 by ayagoumi          #+#    #+#             */
-/*   Updated: 2021/03/06 16:00:35 by ayagoumi         ###   ########.fr       */
+/*   Updated: 2021/03/07 12:57:21 by ayagoumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		initialize_variables(t_rtv1 **rtv, t_scene **scene, char **av)
 		free((*rtv)->data);
 		return (0);
 	}
-	return (1);
+	return (1)
 }
 
 int		main(int ac, char **av)
