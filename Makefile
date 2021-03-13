@@ -6,7 +6,7 @@
 #    By: ayagoumi <ayagoumi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/25 10:38:14 by ayagoumi          #+#    #+#              #
-#    Updated: 2021/03/06 16:19:05 by ayagoumi         ###   ########.fr        #
+#    Updated: 2021/03/13 19:11:40 by yoouali          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,7 +126,7 @@ $(PATH_OBJ)%.o: $(PATH_RAYCAST)%.c $(INC) $(INCLIB)
 clean:
 	@make clean --no-print-directory -C $(PATH_LIB)
 	@$(call ft_clean,$(OBJ))
-	@rmdir $(PATH_OBJ)
+	@rm -rf $(PATH_OBJ)
 
 fclean: clean
 	@make fclean --no-print-directory -C $(PATH_LIB)
